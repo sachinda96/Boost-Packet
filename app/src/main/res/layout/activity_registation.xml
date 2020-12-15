@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/prgSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     android:windowSoftInputMode="adjustResize"
     tools:context=".MainActivity">
 
@@ -41,7 +43,7 @@
             android:layout_x="3dp"
             android:layout_y="238dp"
             android:fontFamily="sans-serif-light"
-            android:text="Welcome"
+            android:text="Sign Up"
             android:textColor="@color/black"
             android:textSize="38dp"
             android:textStyle="bold" />
@@ -51,7 +53,7 @@
             android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:layout_x="2dp"
-            android:layout_y="381dp"
+            android:layout_y="317dp"
             android:text="SIGN IN"
             android:textColor="@color/login_color"
             android:textSize="17dp"
@@ -61,102 +63,66 @@
             android:id="@+id/txtSignUp"
             android:layout_width="104dp"
             android:layout_height="wrap_content"
-            android:layout_x="98dp"
-            android:layout_y="382dp"
+            android:layout_x="97dp"
+            android:layout_y="318dp"
             android:text="SIGN UP"
-            android:clickable="true"
             android:textColor="@color/login_color"
             android:textSize="17dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtdes"
-            android:layout_width="349dp"
-            android:layout_height="69dp"
-            android:layout_x="2dp"
-            android:layout_y="289dp"
-            android:text="There is a gigantic difference between earning a great deal of money and being rich."
-            android:textSize="17dp" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="1dp"
-            android:layout_y="441dp"
+            android:layout_x="-3dp"
+            android:layout_y="352dp"
             app:srcCompat="@drawable/input_group" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="1dp"
-            android:layout_y="522dp"
-            app:srcCompat="@drawable/password_group" />
 
         <EditText
             android:id="@+id/txtEmail"
             android:layout_width="263dp"
             android:layout_height="wrap_content"
-            android:layout_x="60dp"
-            android:layout_y="481dp"
+            android:layout_x="54dp"
+            android:layout_y="387dp"
             android:background="@null"
             android:ems="10"
             android:inputType="textPersonName"
             android:textCursorDrawable="@color/login_color" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="-3dp"
+            android:layout_y="449dp"
+            app:srcCompat="@drawable/password_group" />
+
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="251dp"
             android:layout_height="wrap_content"
-            android:layout_x="61dp"
-            android:layout_y="564dp"
+            android:layout_x="62dp"
+            android:layout_y="485dp"
             android:background="@null"
             android:ems="10"
             android:inputType="textPassword"
             android:textCursorDrawable="@color/login_color" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="4dp"
-            android:layout_y="623dp"
-            android:text="Forgot Password?"
-            android:textColor="@color/login_color" />
-
         <ImageView
             android:id="@+id/btnSignUp"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_x="310dp"
-            android:layout_y="636dp"
+            android:layout_width="wrap_content"
+            android:layout_height="74dp"
+            android:layout_x="268dp"
+            android:layout_y="570dp"
             app:srcCompat="@drawable/top" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="263dp"
-            android:layout_height="wrap_content"
-            android:layout_x="9dp"
-            android:layout_y="711dp"
-            android:text="By sigining us.you agree with our" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="186dp"
-            android:layout_height="wrap_content"
-            android:layout_x="221dp"
-            android:layout_y="712dp"
-            android:text="Terms  Conditions"
-            android:textColor="@android:color/holo_blue_light" />
 
         <ProgressBar
             android:id="@+id/pgrsSignUp"
             style="?android:attr/progressBarStyle"
             android:layout_width="107dp"
             android:layout_height="85dp"
-            android:layout_x="129dp"
-            android:layout_y="630dp"
+            android:layout_x="110dp"
+            android:layout_y="568dp"
             android:indeterminateTint="@color/login_color"
             android:visibility="invisible" />
 

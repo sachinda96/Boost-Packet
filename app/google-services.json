@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254033413708",
+    "project_id": "boost-pocket",
+    "storage_bucket": "boost-pocket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254033413708:android:2e27a5fd239aacf7bc56e9",
+        "android_client_info": {
+          "package_name": "com.boostpocket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254033413708-emagb1ml88aocra6ec0tb69gpalm5g10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTQ_L3tz5sSvNaXTaGTOuFAdLaS-raldc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254033413708-emagb1ml88aocra6ec0tb69gpalm5g10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
