@@ -1,5 +1,6 @@
 package com.boostpocket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,14 +16,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class Registration extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     private EditText txtEmail,txtPassword;
     private ImageView btnSignUp;
     private TextView txtSignIn;
     private ProgressBar progressBar;
+    private DatabaseReference databaseReference;
+    private Map<String, Object> entry = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +49,8 @@ public class Registration extends AppCompatActivity {
         txtSignIn = findViewById(R.id.txtSignIn);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Category");
 
 
         txtSignIn.setOnClickListener(new View.OnClickListener() {
