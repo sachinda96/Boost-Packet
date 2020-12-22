@@ -138,6 +138,30 @@
             android:layout_y="354dp"
             android:text="125000" />
 
+        <ScrollView
+            android:layout_width="349dp"
+            android:layout_height="269dp"
+            android:layout_x="4dp"
+            android:layout_y="388dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/listExpenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+
+
+                </ListView>
+
+            </LinearLayout>
+        </ScrollView>
+
     </AbsoluteLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
