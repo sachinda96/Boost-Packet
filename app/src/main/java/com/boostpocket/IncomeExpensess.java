@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -40,7 +43,8 @@ public class IncomeExpensess extends AppCompatActivity {
     private EditText txtAmount;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-
+    private ImageView viewBack;
+    private ProgressBar progressDone;
     private DatabaseReference databaseReference;
     private Map<String, Object> entry = null;
     private String type="INCOME";
@@ -61,11 +65,15 @@ public class IncomeExpensess extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
 
+
         radioGroup = findViewById(R.id.radioCategoryGroup);
         btnIncome =findViewById(R.id.btnIncome);
         btnExpenses =findViewById(R.id.btnExpensess);
         btnSave = findViewById(R.id.btnSave);
         txtAmount = findViewById(R.id.txtAmount);
+        viewBack = findViewById(R.id.viewback);
+        progressDone = findViewById(R.id.pgrsDone);
+
 
         Query query = FirebaseDatabase.getInstance().getReference("User Income").orderByChild("user").equalTo(mAuth.getUid());
 
@@ -97,15 +105,26 @@ public class IncomeExpensess extends AppCompatActivity {
             }
         });
 
+        viewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+            }
+        });
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewIn) {
+
 
                 if(type.equalsIgnoreCase("INCOME")){
                     saveIncome();
                 }else if(type.equalsIgnoreCase("EXPENSES")){
                     saveExpenses();
                 }
+
+                txtAmount.setText("");
+                radioGroup.removeAllViews();
 
             }
         });
@@ -123,8 +142,6 @@ public class IncomeExpensess extends AppCompatActivity {
             String amount =txtAmount.getText().toString();
             setIncomeExpenses(userIncome,amount,id);
 
-
-
             Toast.makeText(IncomeExpensess.this, "Successful saved expenses",
                     Toast.LENGTH_SHORT).show();
 
@@ -141,7 +158,10 @@ public class IncomeExpensess extends AppCompatActivity {
 
         if(id != null){
 
+            progressDone.setVisibility(View.VISIBLE);
+
             mDatabase.child("User Income").child(UUID.randomUUID().toString()).setValue(new UserIncome(mAuth.getUid(),id,txtAmount.getText().toString(),formatDate(new Date()),txtAmount.getText().toString()));
+            progressDone.setVisibility(View.INVISIBLE);
             Toast.makeText(IncomeExpensess.this, "Successful saved new income",
                     Toast.LENGTH_SHORT).show();
 
@@ -177,6 +197,8 @@ public class IncomeExpensess extends AppCompatActivity {
 
         Integer seq = 0;
 
+        radioGroup.removeAllViews();
+
         for (Map.Entry<String, Object> entry : value.entrySet()){
 
             Category category = setCategory((Map) entry.getValue());
@@ -187,6 +209,7 @@ public class IncomeExpensess extends AppCompatActivity {
                 radioButton.setText(category.getName());
                 radioButton.setId(seq);
                 radioButton.setTag(entry.getKey());
+                radioButton.setTypeface(radioButton.getTypeface(), Typeface.BOLD);
                 seq = seq+1;
 
                 radioGroup.addView(radioButton);
@@ -199,7 +222,6 @@ public class IncomeExpensess extends AppCompatActivity {
     private Category setCategory(Map map){
 
         Category category =new Category();
-        category.setIcon(map.get("icon").toString());
         category.setType(map.get("type").toString());
         category.setName(map.get("name").toString());
         category.setUser(map.get("user").toString());
@@ -224,6 +246,7 @@ public class IncomeExpensess extends AppCompatActivity {
     private void setIncomeExpenses(Map<String, Object> value , String amount,String categoryId){
 
         String expensesId = UUID.randomUUID().toString();
+        progressDone.setVisibility(View.VISIBLE);
 
         mDatabase.child("User Expenses").child(expensesId).setValue(new UserExpenses(mAuth.getUid(),categoryId,formatDate(new Date())
                             ,amount));
@@ -239,7 +262,6 @@ public class IncomeExpensess extends AppCompatActivity {
                     userIncome.setBalance("0");
                 }else{
                     String currentValue = new BigDecimal(userIncome.getBalance()).setScale(2).subtract(new BigDecimal(amount).setScale(2)).setScale(2).toString();
-                    System.out.println("currentValue "+currentValue);
                     userIncome.setBalance(currentValue);
 
                 }
@@ -252,6 +274,8 @@ public class IncomeExpensess extends AppCompatActivity {
         for (IncomeExpenses incomeExpenses : incomeExpenses) {
             mDatabase.child("Income Expenses").child(UUID.randomUUID().toString()).setValue(incomeExpenses);
         }
+
+        progressDone.setVisibility(View.INVISIBLE);
 
     }
 }

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoostPocket">
-        <activity android:name=".IncomeExpensess"></activity>
+        <activity android:name=".ManageCategory"></activity>
+        <activity android:name=".DailyExpenses" />
+        <activity android:name=".IncomeExpensess" />
         <activity android:name=".Dashboard" />
         <activity android:name=".Registration" />
         <activity android:name=".MainActivity">

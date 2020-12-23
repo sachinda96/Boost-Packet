@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DailyExpenses">
+
+    <AbsoluteLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        tools:ignore="Deprecated,MissingConstraints"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="-16dp">
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="3dp"
+            android:layout_y="191dp"
+            android:background="#FBFAFA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="173dp" />
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="424dp"
+            android:layout_height="71dp"
+            android:layout_x="0dp"
+            android:layout_y="75dp"
+            android:text="Select Expenses Date "
+            android:textSize="30dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="71dp" />
+
+        <ImageView
+            android:id="@+id/doneView"
+            android:layout_width="408dp"
+            android:layout_height="211dp"
+            android:layout_x="-24dp"
+            android:layout_y="495dp"
+            app:srcCompat="@drawable/donebutton" />
+
+        <ImageView
+            android:id="@+id/btnviewback"
+            android:layout_width="45dp"
+            android:layout_height="41dp"
+            android:layout_x="1dp"
+            android:layout_y="14dp"
+            app:srcCompat="@drawable/backicon" />
+
+        <ScrollView
+            android:id="@+id/scrollMain"
+            android:layout_width="349dp"
+            android:layout_height="522dp"
+            android:layout_x="18dp"
+            android:layout_y="157dp">
+
+            <LinearLayout
+                android:id="@+id/layoutExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </AbsoluteLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

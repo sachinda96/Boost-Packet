@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,15 +30,13 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class Dashboard extends AppCompatActivity {
 
-    private Button addButton;
-    private TextView txtDay,txtTotalIncome,txtTotalExpenses;
+    private Button addButton,btnViewDailyExpenses,btnCategory;
+    private TextView txtDay,txtTotalIncome,txtTotalExpenses,txtDailyTotal;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -44,7 +45,8 @@ public class Dashboard extends AppCompatActivity {
     private Map<String,Object> dailyExpenses;
     private List<CategoryExpenses> categoryExpensesList;
     private Category category= null;
-    Map<String, Object> categoryList=null;
+    private LinearLayout linearLayout;
+    private Map<String, Object> categoryList=null;
 
 
     @Override
@@ -59,18 +61,36 @@ public class Dashboard extends AppCompatActivity {
         txtDay =findViewById(R.id.txtDay);
         txtTotalIncome =findViewById(R.id.txtTotIncome);
         txtTotalExpenses =findViewById(R.id.txtTotExpenses);
+        linearLayout = findViewById(R.id.layoutDailyExpenses);
+        txtDailyTotal = findViewById(R.id.txtDailyExpensesTotal);
+        btnViewDailyExpenses = findViewById(R.id.btnDailyView);
+        btnCategory = findViewById(R.id.btnCategory);
 
         txtDay.setText(getDateShortName(new SimpleDateFormat("EEEE").format(new Date()).toUpperCase()));
 
         setAllCategory();
         getAllUserIncome();
         getAllUserExpenses();
-        getDailyExpenses();
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewIn) {
                 startActivity(new Intent(getApplicationContext(), IncomeExpensess.class));
+            }
+        });
+
+        btnViewDailyExpenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View viewIn) {
+                startActivity(new Intent(getApplicationContext(), DailyExpenses.class));
+            }
+        });
+
+        btnCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View viewIn) {
+                startActivity(new Intent(getApplicationContext(), ManageCategory.class));
             }
         });
     }
@@ -82,6 +102,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 categoryList = (Map<String, Object>) snapshot.getValue();
+                getDailyExpenses();
             }
 
             @Override
@@ -131,7 +152,7 @@ public class Dashboard extends AppCompatActivity {
                     UserIncome userIncome = setUserIncome((Map) income.getValue());
                     totalIncome = new BigDecimal(totalIncome).add(new BigDecimal(userIncome.getAmount())).setScale(2).toString();
                 }
-                txtTotalIncome.setText(totalIncome);
+                txtTotalIncome.setText("Rs."+totalIncome);
             }
 
             @Override
@@ -156,7 +177,7 @@ public class Dashboard extends AppCompatActivity {
                     UserExpenses userExpenses = setUserExpenses((Map) income.getValue());
                     totalExpenses = new BigDecimal(totalExpenses).add(new BigDecimal(userExpenses.getAmount())).setScale(2).toString();
                 }
-                txtTotalExpenses.setText(totalExpenses);
+                txtTotalExpenses.setText("Rs."+totalExpenses);
             }
 
             @Override
@@ -179,44 +200,55 @@ public class Dashboard extends AppCompatActivity {
 
                 dailyExpenses = (Map<String, Object>) snapshot.getValue();
 
-                for (Map.Entry<String, Object> dailyExpenses : dailyExpenses.entrySet()) {
+                if(dailyExpenses!=null){
+                    for (Map.Entry<String, Object> dailyExpenses : dailyExpenses.entrySet()) {
 
-                    System.out.println("work 2 ");
-                    boolean isNew =true;
-                    UserExpenses userExp = setUserExpenses((Map) dailyExpenses.getValue());
+                        boolean isNew =true;
+                        UserExpenses userExp = setUserExpenses((Map) dailyExpenses.getValue());
 
-                    if(!categoryExpensesList.isEmpty()){
-                        for (CategoryExpenses categoryExpenses : categoryExpensesList) {
-                            if(categoryExpenses.getCategoryId().equalsIgnoreCase(userExp.getCategoryId())){
-                                categoryExpenses.setAmount(new BigDecimal(categoryExpenses.getAmount()).add(new BigDecimal(userExp.getAmount())).setScale(2).toString());
-                                categoryExpensesList.set(categoryExpensesList.indexOf(categoryExpenses),categoryExpenses);
-                                isNew =false;
+                        if(!categoryExpensesList.isEmpty()){
+                            for (CategoryExpenses categoryExpenses : categoryExpensesList) {
+                                if(categoryExpenses.getCategoryId().equalsIgnoreCase(userExp.getCategoryId())){
+                                    categoryExpenses.setAmount(new BigDecimal(categoryExpenses.getAmount()).add(new BigDecimal(userExp.getAmount())).setScale(2).toString());
+                                    categoryExpensesList.set(categoryExpensesList.indexOf(categoryExpenses),categoryExpenses);
+                                    isNew =false;
+                                }
                             }
                         }
+
+                        if(isNew){
+                            categoryExpensesList.add(setCategoryExpenses(userExp));
+                        }
+
                     }
 
-                    if(isNew){
-                        categoryExpensesList.add(setCategoryExpenses(userExp));
-                    }
 
+                    if(!categoryExpensesList.isEmpty()){
+
+                        String dailyTotalExpenses="0.00";
+
+                        for (CategoryExpenses categoryExpenses : categoryExpensesList) {
+
+                            dailyTotalExpenses =new BigDecimal(dailyTotalExpenses).add(new BigDecimal(categoryExpenses.getAmount())).setScale(2).toString();
+                            TextView first = new TextView(getApplicationContext());
+                            first.setLayoutParams(linearLayout.getLayoutParams());
+                            first.setTextColor(Color.parseColor("#FF6761"));
+                            first.setTextSize(20);
+                            first.setTypeface(first.getTypeface(), Typeface.BOLD);
+                            first.setGravity(Gravity.CENTER);
+                            first.setPadding(30, 0, 5, 5);
+                            first.setText(categoryExpenses.getName()+" - "+ "Rs."+categoryExpenses.getAmount());
+                            linearLayout.addView(first);
+                        }
+
+                        txtDailyTotal.setText("RS."+dailyTotalExpenses);
+
+                    }
                 }
 
 
-                if(!categoryExpensesList.isEmpty()){
 
-                    List<HashMap<String,String>> listData= new ArrayList<>();
-
-                    for (CategoryExpenses categoryExpenses : categoryExpensesList) {
-                        HashMap<String,String> map = new HashMap<>();
-                        map.put("ListTitle", categoryExpenses.getName());
-                        map.put("ListDescription", categoryExpenses.getAmount());
-                        listData.add(map);
-                    }
-
-                }
-
-
-                System.out.println("size : "+categoryExpensesList.size());
+         //       System.out.println("size : "+categoryExpensesList.size());
 
             }
 
@@ -282,7 +314,6 @@ public class Dashboard extends AppCompatActivity {
     private Category setCategory(Map map){
 
         Category category =new Category();
-        category.setIcon(map.get("icon").toString());
         category.setType(map.get("type").toString());
         category.setName(map.get("name").toString());
         category.setUser(map.get("user").toString());

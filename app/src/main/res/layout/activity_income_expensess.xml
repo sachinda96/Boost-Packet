@@ -14,47 +14,114 @@
         tools:ignore="Deprecated,MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="-16dp">
+        android:id="@+id/imageView4"
+        android:layout_width="477dp"
+        android:layout_height="176dp"
+        android:layout_x="-61dp"
+        android:layout_y="-40dp"
+        app:srcCompat="@drawable/logo_size" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="491dp"
+            android:layout_height="433dp"
+            android:layout_x="-64dp"
+            android:layout_y="-32dp"
+            app:srcCompat="@drawable/totalcard" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_x="28dp"
+            android:layout_y="104dp"
+            android:text="ADD NEW YOUR  ,"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="69dp"
+            android:layout_y="240dp"
+            android:text="INCOME"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            tools:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="240dp"
+            android:layout_y="239dp"
+            android:text="EXPENSES"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            tools:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTotIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="85dp"
+            android:layout_y="281dp"
+            android:text="ADD"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/txtTotExpenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="258dp"
+            android:layout_y="281dp"
+            android:text="ADD"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
 
         <Button
             android:id="@+id/btnIncome"
-            android:layout_width="107dp"
-            android:layout_height="59dp"
-            android:layout_x="39dp"
-            android:layout_y="154dp"
-            android:text="Income"
+            android:layout_width="wrap_content"
+            android:layout_height="33dp"
+            android:layout_x="59dp"
+            android:layout_y="275dp"
+            android:background="@android:color/transparent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="46dp"
             tools:layout_editor_absoluteY="137dp" />
 
         <Button
             android:id="@+id/btnExpensess"
-            android:layout_width="108dp"
-            android:layout_height="58dp"
-            android:layout_x="209dp"
-            android:layout_y="150dp"
-            android:text="EXPENSESS"
+            android:layout_width="109dp"
+            android:layout_height="26dp"
+            android:layout_x="225dp"
+            android:layout_y="280dp"
+            android:background="@android:color/transparent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="210dp"
             tools:layout_editor_absoluteY="137dp" />
 
         <EditText
             android:id="@+id/txtAmount"
-            android:layout_width="269dp"
+            android:layout_width="309dp"
             android:layout_height="60dp"
-            android:layout_x="45dp"
-            android:layout_y="281dp"
+            android:layout_x="23dp"
+            android:layout_y="313dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Amount"
             tools:ignore="MissingConstraints"
+            android:hint="Add Amount Rs."
             tools:layout_editor_absoluteX="52dp"
             tools:layout_editor_absoluteY="227dp" />
 
         <ScrollView
             android:layout_width="323dp"
-            android:layout_height="296dp"
+            android:layout_height="276dp"
             android:layout_x="22dp"
-            android:layout_y="370dp"
+            android:layout_y="390dp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="2dp"
             tools:layout_editor_absoluteY="321dp">
@@ -76,13 +143,42 @@
 
         </ScrollView>
 
+
+
+        <ImageView
+            android:id="@+id/viewback"
+            android:layout_width="45dp"
+            android:layout_height="41dp"
+            android:layout_x="1dp"
+            android:layout_y="14dp"
+            app:srcCompat="@drawable/backicon" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="129dp"
+            android:layout_x="4dp"
+            android:layout_y="639dp"
+            app:srcCompat="@drawable/donebutton" />
+
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
+            android:layout_width="207dp"
             android:layout_height="wrap_content"
-            android:layout_x="139dp"
-            android:layout_y="669dp"
-            android:text="Add" />
+            android:layout_x="80dp"
+            android:background="@android:color/transparent"
+            android:layout_y="677dp"
+             />
+
+        <ProgressBar
+            android:id="@+id/pgrsDone"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="107dp"
+            android:layout_height="85dp"
+            android:layout_x="123dp"
+            android:layout_y="640dp"
+            android:indeterminateTint="@color/login_color"
+            android:visibility="invisible" />
 
     </AbsoluteLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

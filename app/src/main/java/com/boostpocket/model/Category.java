@@ -7,16 +7,14 @@ public class Category {
 
     private String name;
     private String type;
-    private String icon;
     private String user;
 
     public Category() {
     }
 
-    public Category(String name, String type, String icon, String user) {
+    public Category(String name, String type, String user) {
         this.name = name;
         this.type = type;
-        this.icon = icon;
         this.user = user;
     }
 
@@ -36,13 +34,6 @@ public class Category {
         this.type = type;
     }
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
 
     public String getUser() {
         return user;

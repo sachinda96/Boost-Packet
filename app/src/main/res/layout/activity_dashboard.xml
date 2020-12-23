@@ -131,12 +131,12 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textDaily"
+            android:id="@+id/txtDailyExpensesTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="98dp"
             android:layout_y="354dp"
-            android:text="125000" />
+            android:text="0.00" />
 
         <ScrollView
             android:layout_width="349dp"
@@ -145,22 +145,29 @@
             android:layout_y="388dp">
 
             <LinearLayout
+                android:id="@+id/layoutDailyExpenses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <ListView
-                    android:id="@+id/listExpenses"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-
-
-                </ListView>
-
             </LinearLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/btnDailyView"
+            android:layout_width="53dp"
+            android:layout_height="59dp"
+            android:layout_x="45dp"
+            android:background="@android:color/transparent"
+            android:layout_y="674dp" />
+
+        <Button
+            android:id="@+id/btnCategory"
+            android:layout_width="46dp"
+            android:layout_height="65dp"
+            android:layout_x="232dp"
+            android:layout_y="670dp"
+            android:background="@android:color/transparent" />
 
     </AbsoluteLayout>
 

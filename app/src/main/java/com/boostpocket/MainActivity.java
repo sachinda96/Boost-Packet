@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                     Category category = new Category();
                     category.setName(e);
                     category.setType("INCOME");
-                    category.setIcon("icon");
                     category.setUser("all");
 
                     mDatabase.child("Category").child(UUID.randomUUID().toString()).setValue(category);
