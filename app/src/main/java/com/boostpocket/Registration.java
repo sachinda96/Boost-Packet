@@ -30,7 +30,7 @@ public class Registration extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    private EditText txtEmail,txtPassword;
+    private EditText txtEmail,txtPassword,txtConfirmPassword;
     private ImageView btnSignUp;
     private TextView txtSignIn;
     private ProgressBar progressBar;
@@ -47,6 +47,7 @@ public class Registration extends AppCompatActivity {
         btnSignUp =findViewById(R.id.btnSignUp);
         progressBar= findViewById(R.id.pgrsSignUp);
         txtSignIn = findViewById(R.id.txtSignIn);
+        txtConfirmPassword = findViewById(R.id.txtConfirePassword);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -65,25 +66,40 @@ public class Registration extends AppCompatActivity {
 
                 String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
+                String confirmPassword = txtConfirmPassword.getText().toString();
 
-                progressBar.setVisibility(View.VISIBLE);
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Registration.this, (OnCompleteListener<AuthResult>) task -> {
-                            if (task.isSuccessful()) {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(Registration.this, "Registration Success.",
-                                        Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                if(email.equalsIgnoreCase("")){
+                    Toast.makeText(Registration.this, "Email is empty",
+                            Toast.LENGTH_SHORT).show();
+                }else if(password.equalsIgnoreCase(confirmPassword)){
 
-                            } else {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(Registration.this, "Registration failed.",
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(Registration.this, (OnCompleteListener<AuthResult>) task -> {
+                                if (task.isSuccessful()) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    Toast.makeText(Registration.this, "Registration Success.",
+                                            Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                                } else {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(Registration.this, "Registration failed.",
                                             Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
+                                }
+                            });
+
+                }else{
+
+                    Toast.makeText(Registration.this, "Password does not matched",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
 
 
 

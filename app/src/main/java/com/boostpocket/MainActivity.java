@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 for (String e : list) {
                     Category category = new Category();
                     category.setName(e);
-                    category.setType("INCOME");
+                    category.setType("EXPENSES");
                     category.setUser("all");
 
                     mDatabase.child("Category").child(UUID.randomUUID().toString()).setValue(category);
@@ -84,25 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
 
                 startActivity(new Intent(getApplicationContext(),Dashboard.class));
-//                progressBar.setVisibility(View.VISIBLE);
-//
-//                mAuth.signInWithEmailAndPassword(email, password)
-//                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    progressBar.setVisibility(View.INVISIBLE);
-//                                    startActivity(new Intent(getApplicationContext(),Dashboard.class));
-//                                    Toast.makeText(MainActivity.this, "Authentication Passed",
-//                                            Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    progressBar.setVisibility(View.INVISIBLE);
-//                                    Toast.makeText(MainActivity.this, "Authentication failed.Check Email and Password",
-//                                            Toast.LENGTH_SHORT).show();
-//
-//                                }
-//                            }
-//                        });
+                progressBar.setVisibility(View.VISIBLE);
+
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    startActivity(new Intent(getApplicationContext(),Dashboard.class));
+                                    Toast.makeText(MainActivity.this, "Authentication Passed",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(MainActivity.this, "Authentication failed.Check Email and Password",
+                                            Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
 
             }
         });

@@ -148,11 +148,16 @@ public class Dashboard extends AppCompatActivity {
                 userIncome = (Map<String, Object>) snapshot.getValue();
 
                 String totalIncome = "0.00";
-                for (Map.Entry<String, Object> income : userIncome.entrySet()) {
-                    UserIncome userIncome = setUserIncome((Map) income.getValue());
-                    totalIncome = new BigDecimal(totalIncome).add(new BigDecimal(userIncome.getAmount())).setScale(2).toString();
+
+                if(userIncome != null){
+                    for (Map.Entry<String, Object> income : userIncome.entrySet()) {
+                        UserIncome userIncome = setUserIncome((Map) income.getValue());
+                        totalIncome = new BigDecimal(totalIncome).add(new BigDecimal(userIncome.getAmount())).setScale(2).toString();
+                    }
+                    txtTotalIncome.setText("Rs."+totalIncome);
                 }
-                txtTotalIncome.setText("Rs."+totalIncome);
+
+
             }
 
             @Override
@@ -173,10 +178,14 @@ public class Dashboard extends AppCompatActivity {
                 userExpenses= (Map<String, Object>) snapshot.getValue();
 
                 String totalExpenses = "0.00";
-                for (Map.Entry<String, Object> income : userExpenses.entrySet()) {
-                    UserExpenses userExpenses = setUserExpenses((Map) income.getValue());
-                    totalExpenses = new BigDecimal(totalExpenses).add(new BigDecimal(userExpenses.getAmount())).setScale(2).toString();
+
+                if (userExpenses!= null){
+                    for (Map.Entry<String, Object> income : userExpenses.entrySet()) {
+                        UserExpenses userExpenses = setUserExpenses((Map) income.getValue());
+                        totalExpenses = new BigDecimal(totalExpenses).add(new BigDecimal(userExpenses.getAmount())).setScale(2).toString();
+                    }
                 }
+
                 txtTotalExpenses.setText("Rs."+totalExpenses);
             }
 

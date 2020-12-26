@@ -100,21 +100,24 @@
             android:layout_height="wrap_content"
             android:layout_x="60dp"
             android:layout_y="481dp"
-            android:background="@null"
+            android:background="#F8F6F6"
             android:ems="10"
+            android:hint="Email Address"
             android:inputType="textPersonName"
-            android:textCursorDrawable="@color/login_color" />
+            android:textCursorDrawable="@color/login_color"
+            tools:background="#FFFFFF" />
 
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="251dp"
-            android:layout_height="wrap_content"
-            android:layout_x="61dp"
-            android:layout_y="564dp"
-            android:background="@null"
+            android:layout_height="38dp"
+            android:layout_x="58dp"
+            android:layout_y="557dp"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
-            android:textCursorDrawable="@color/login_color" />
+            android:textCursorDrawable="@color/login_color"
+            tools:background="#FFFFFF" />
 
         <TextView
             android:id="@+id/textView5"
